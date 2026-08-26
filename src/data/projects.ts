@@ -22,6 +22,7 @@ export interface Project {
 export const projects: Array<Project> = [
 	{
 		slug: "nexcall-portal",
+		screenshot: "/screenshots/nexcall-portal.webp",
 		liveUrl: "https://portal.nexcalltech.com",
 		title: "NexCall Portal",
 		category: "SaaS · Multi-tenant",
@@ -47,6 +48,7 @@ export const projects: Array<Project> = [
 	},
 	{
 		slug: "nexcall-hrms",
+		screenshot: "/screenshots/nexcall-hrms.webp",
 		liveUrl: "https://hrms.nexcalltech.com",
 		title: "NexCall HRMS",
 		category: "Internal Tool · HR",
@@ -66,6 +68,7 @@ export const projects: Array<Project> = [
 	},
 	{
 		slug: "ourgarden",
+		screenshot: "/screenshots/ourgarden.webp",
 		liveUrl:
 			"https://our-garden-web-backend--our-garden-d2dcf.us-east4.hosted.app/",
 		title: "OurGarden",
@@ -86,6 +89,7 @@ export const projects: Array<Project> = [
 	},
 	{
 		slug: "reneespace",
+		screenshot: "/screenshots/reneespace.webp",
 		liveUrl: "https://reneespace.com",
 		title: "ReneeSpace",
 		category: "AI · Mental Health · Web App",
@@ -105,7 +109,7 @@ export const projects: Array<Project> = [
 	},
 	{
 		slug: "makro-middleware",
-		screenshot: "/screenshots/makro-middleware.png",
+		screenshot: "/screenshots/makro-middleware.webp",
 		title: "Makro SCO Middleware",
 		category: "Payment Middleware · Enterprise",
 		problem:
@@ -124,6 +128,7 @@ export const projects: Array<Project> = [
 	},
 	{
 		slug: "everlooms",
+		screenshot: "/screenshots/everlooms.webp",
 		liveUrl: "https://everlooms.com",
 		title: "Everlooms",
 		category: "Web Platform · Headless",

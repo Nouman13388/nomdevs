@@ -345,3 +345,39 @@ the gap. The existing checklist (auth, payments, data, secrets, deploys)
 was already exactly what vibe-coded apps typically get wrong, so this is
 framing what's there rather than adding a redundant new argument
 elsewhere.
+
+---
+
+## 2026-08-27 — Wired in the 6 real screenshots, converted everything to WebP
+
+User saved the screenshots directly into `public/screenshots/` with macOS's
+default naming (`Screenshot 2026-08-27 at 3.27.25 AM.png`, etc.) — matched
+each to a project by viewing it, since the names carry no identifying
+info: `nexcall-portal` (Admin Home dashboard), `nexcall-hrms` (attendance
+dashboard), `ourgarden` (marketplace homepage — a second OurGarden shot,
+the Sage AI chat screen, was provided but not used since only one image
+slot exists per project), `reneespace` and `everlooms` (homepages).
+Two extra/duplicate shots (an alternate NexCall Portal lead-detail view,
+and the OurGarden Sage chat) were deleted rather than kept unused in
+`public/`.
+
+**Renaming needed a workaround**: macOS screenshot filenames use a
+non-breaking space (U+202F) before "AM"/"PM", not a normal space — a
+literal retyped `mv "...3.27.25 AM.png" ...` silently failed with "No such
+file" because the typed space didn't byte-match. Used a glob
+(`"...3.27.25"*.png`) instead of the literal filename to sidestep it.
+
+**WebP conversion**: no `cwebp`/ImageMagick on this machine, and macOS's
+`sips` can resize/convert many formats but cannot export WebP. Used
+headless Chromium instead (already available from the favicon work) —
+load each PNG into an offscreen `<canvas>`, downscale to a 1600px max
+width (the sources were ~2940px wide, far more than any card/hero ever
+displays), and export via `canvas.toDataURL('image/webp', 0.82)`. No new
+dependency. Net effect: ~13MB of PNGs → ~712KB of WebP across all 6 images
+(the largest single-project drop: ReneeSpace's 4.8MB screenshot → 125KB).
+Original PNGs deleted after conversion — only `.webp` files remain in
+`public/screenshots/`.
+
+`CaseStudyCard`/`CaseStudyPage` needed no code changes — `project.screenshot`
+was already a plain path string; only the data values changed from `.png`
+placeholders to real `.webp` files.
