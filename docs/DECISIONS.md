@@ -164,3 +164,18 @@ on-brand, given the tokens were already fully specified.
   Nav/Footer, using `var(--color-*)` (not literal hex) so it stays tied to
   `tokens.css` if the palette ever changes. The two must be updated
   together by hand; there's no build step generating one from the other.
+
+---
+
+## 2026-08-27 — Domain live; git workflow: commit but don't push
+
+`nomdevs.com` is live on the Worker. The DNS conflict was a leftover A
+record (Hostinger's old parking IP, `2.57.91.91`) auto-imported into the
+Cloudflare zone when nameservers were switched — deleted directly in
+Cloudflare's DNS Records page (editing/deleting at Hostinger did nothing;
+once nameservers point at Cloudflare, Hostinger's own DNS panel is no
+longer authoritative and isn't synced with Cloudflare's zone).
+
+`main` is git-connected to the Worker for auto-deploy on push. **Per the
+user: create commits locally, don't push — they push to `origin`
+themselves.** See `docs/ARCHITECTURE.md`'s Git workflow section.

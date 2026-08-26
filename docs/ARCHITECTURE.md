@@ -106,3 +106,13 @@ Data lives in typed files under `src/data/` (zero JSX). Section components
 in `src/components/sections/` accept that data as props — they contain no
 hardcoded copy. `src/routes/index.tsx` is the only place that imports from
 `src/data/` and wires it into the section components, in design order.
+
+## Git workflow
+
+`main` is git-connected to the Cloudflare Worker for auto-deploy on push
+(see **Static output & deployment** above) — a push to `origin/main` kicks
+off a build automatically.
+
+**Commits are made locally but not pushed.** The user pushes to `origin`
+themselves. Don't run `git push` in this repo unless explicitly asked —
+create the commit and stop there.
