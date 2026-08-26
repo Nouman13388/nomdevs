@@ -17,8 +17,12 @@ export function Nav() {
 	return (
 		<header className="sticky top-0 z-50 border-b border-border bg-bg/85 backdrop-blur">
 			<Container className="flex h-18 items-center justify-between">
-				{/* Plain lockup, not a link — matches the source design (a div, not an anchor). */}
-				<div className="flex items-center gap-2">
+				{/*
+				 * Now links home — the source design had it as a plain div, which
+				 * made sense on a single-page site, but a logo that doesn't return
+				 * home reads as broken once there are real subpages.
+				 */}
+				<a href="/" className="flex items-center gap-2">
 					<Logomark className="size-8 shrink-0" />
 					<div className="flex flex-col leading-tight">
 						<span className="text-base font-bold tracking-logo text-text">
@@ -28,7 +32,7 @@ export function Nav() {
 							product engineering
 						</span>
 					</div>
-				</div>
+				</a>
 
 				<nav className="hidden items-center gap-8 md:flex">
 					{NAV_LINKS.map((link) => (
@@ -43,7 +47,7 @@ export function Nav() {
 				</nav>
 
 				<div className="flex items-center gap-4">
-					<Button href="#contact" size="sm" className="hidden sm:inline-flex">
+					<Button href="/#contact" size="sm" className="hidden sm:inline-flex">
 						Book a Call
 					</Button>
 					<button
@@ -84,7 +88,7 @@ export function Nav() {
 						</a>
 					))}
 					<Button
-						href="#contact"
+						href="/#contact"
 						size="sm"
 						className="mt-2 self-start sm:hidden"
 					>

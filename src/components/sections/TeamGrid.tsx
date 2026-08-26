@@ -1,7 +1,6 @@
 import { motion } from "motion/react";
-import { TeamCard } from "#/components/sections/TeamCard";
+import { TeamCard, type TeamMember } from "#/components/sections/TeamCard";
 import { Container } from "#/components/ui/Container";
-import type { TeamMember } from "#/data/team";
 import {
 	revealHidden,
 	revealTransition,
@@ -14,6 +13,8 @@ export interface TeamGridProps {
 	team: Array<TeamMember>;
 }
 
+// Unused (Team section removed from the homepage — see docs/DECISIONS.md).
+// Kept on disk in case Team comes back.
 /** Reflows for 1–8+ members. */
 export function TeamGrid({ heading, team }: TeamGridProps) {
 	const { ref, inView } = useScrollReveal<HTMLElement>();

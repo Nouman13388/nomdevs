@@ -34,8 +34,8 @@ export function CaseStudyGrid({ heading, projects }: CaseStudyGridProps) {
 			<Container className="py-16">
 				<h2 className="m-0 mb-8 text-2xl font-bold">{heading}</h2>
 				<div className="grid grid-cols-[repeat(auto-fit,minmax(min(320px,100%),1fr))] gap-8">
-					{projects.map((project) => (
-						<CaseStudyCard key={project.slug} project={project} />
+					{projects.map((project, index) => (
+						<CaseStudyCard key={project.slug} project={project} index={index} />
 					))}
 				</div>
 			</Container>

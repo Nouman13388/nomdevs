@@ -19,11 +19,11 @@ export const siteContent = {
 	work: {
 		heading: "Selected work",
 	},
+	alsoShipped: {
+		heading: "Also shipped",
+	},
 	services: {
 		heading: "Services",
-	},
-	team: {
-		heading: "Team",
 	},
 	contact: {
 		heading: "Have a project in mind?",

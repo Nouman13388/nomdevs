@@ -179,3 +179,17 @@ longer authoritative and isn't synced with Cloudflare's zone).
 `main` is git-connected to the Worker for auto-deploy on push. **Per the
 user: create commits locally, don't push — they push to `origin`
 themselves.** See `docs/ARCHITECTURE.md`'s Git workflow section.
+
+---
+
+## 2026-08-27 — Team section removed (content/structure update, part 1)
+
+Per explicit instruction: deleted `src/data/team.ts`, removed `TeamGrid`
+usage from `src/routes/index.tsx`, removed the `team` heading from
+`src/data/site.ts`, removed the `#team` nav link from `lib/constants.ts`.
+
+`TeamCard.tsx`/`TeamGrid.tsx` kept on disk, unused, per instruction ("in
+case needed later"). Their `TeamMember` type used to import from
+`data/team.ts`; since that file is gone, the type is now defined inline in
+`TeamCard.tsx` and re-exported, so the two files stay self-contained and
+still type-check while unused rather than depending on a deleted file.

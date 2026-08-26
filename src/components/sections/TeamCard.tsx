@@ -1,8 +1,16 @@
 import { Button } from "#/components/ui/Button";
 import { Tag } from "#/components/ui/Tag";
-import type { TeamMember } from "#/data/team";
 import { cn } from "#/lib/cn";
 import { PLACEHOLDER_STRIPE_BG } from "#/lib/constants";
+
+// Unused (Team section removed from the homepage — see docs/DECISIONS.md).
+// Kept on disk in case Team comes back; inlined rather than importing from
+// a data/team.ts that no longer exists, so this stays self-contained.
+export interface TeamMember {
+	name: string;
+	role: string;
+	skills: Array<string>;
+}
 
 export function TeamCard({ member }: { member: TeamMember }) {
 	return (

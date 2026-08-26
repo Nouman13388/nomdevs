@@ -3,11 +3,13 @@ export interface NavLink {
 	label: string;
 }
 
+// Absolute (/#work, not #work) so they still resolve correctly from a
+// case-study page, not just from "/" — needed once the site became
+// multi-page (see docs/DECISIONS.md).
 export const NAV_LINKS: Array<NavLink> = [
-	{ href: "#work", label: "Work" },
-	{ href: "#services", label: "Services" },
-	{ href: "#team", label: "Team" },
-	{ href: "#contact", label: "Contact" },
+	{ href: "/#work", label: "Work" },
+	{ href: "/#services", label: "Services" },
+	{ href: "/#contact", label: "Contact" },
 ];
 
 /**
