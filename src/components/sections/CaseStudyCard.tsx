@@ -57,13 +57,26 @@ export function CaseStudyCard({ project, index }: CaseStudyCardProps) {
 					))}
 				</ul>
 
-				<Button
-					href={`/${project.slug}`}
-					variant="ghost"
-					className="mt-4 self-start font-semibold"
-				>
-					View Case Study →
-				</Button>
+				<div className="mt-4 flex flex-wrap items-center gap-4">
+					{project.liveUrl && (
+						<Button
+							href={project.liveUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							variant="outline"
+							size="sm"
+						>
+							Visit site ↗
+						</Button>
+					)}
+					<Button
+						href={`/${project.slug}`}
+						variant="ghost"
+						className="font-semibold"
+					>
+						View Case Study →
+					</Button>
+				</div>
 			</div>
 		</Card>
 	);

@@ -260,3 +260,35 @@ added real complexity for a fully static, prerendered site where a plain
 navigation between two already-static pages is effectively instant anyway.
 Engineering trade-off, not asked for either way — noting since a "real" SPA
 transition would use `Link`.
+
+---
+
+## 2026-08-27 — "Visit site" button (carousel, grid, and case-study pages)
+
+Added `liveUrl?: string` to `Project` — optional, since not every project
+is publicly visitable. The button only renders when it's set, so a project
+with no public URL (Makro SCO Middleware — confidentiality) just shows
+"View Case Study" alone, no dead/placeholder button.
+
+**Required a structural fix first**: `FeaturedWorkCarousel`'s cards were
+each a single whole-card `<a>` (via `Card href=...`). Adding a second
+action inside that would have nested an `<a>` inside an `<a>` — invalid
+HTML, unpredictable click behavior. Changed to a plain (non-link) `Card`
+holding two independent, real links — "Visit site" (conditional, opens in
+a new tab) and "View Case Study" (always present). `CaseStudyCard` already
+had this shape (a static card + a real ghost-button link), so it only
+needed the second button added, no restructuring.
+
+Per user confirmation, the button appears in all three places a project is
+shown: the featured carousel, the full case-study grid, and the project's
+own case-study page (in the hero, under the problem statement).
+
+**URLs**: user supplied 5 of 6 — `nexcall-portal` → portal.nexcalltech.com,
+`nexcall-hrms` → hrms.nexcalltech.com, `ourgarden` → the given Firebase
+App Hosting URL, `reneespace` → reneespace.com, `everlooms` → everlooms.com.
+`makro-middleware` intentionally left without `liveUrl` — user said the
+rest "does not allow disclosure," consistent with that project's existing
+confidentiality framing. One ambiguity flagged and not resolved: the user
+also sent a bare `nexcalltech.com` (no subdomain) that doesn't map cleanly
+to any single project — not used anywhere; asked the user to clarify if it
+was meant to replace one of the two nexcalltech subdomains.

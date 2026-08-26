@@ -20,6 +20,7 @@ export interface Project {
 export const projects: Array<Project> = [
 	{
 		slug: "nexcall-portal",
+		liveUrl: "https://portal.nexcalltech.com",
 		title: "NexCall Portal",
 		category: "SaaS · Multi-tenant",
 		problem:
@@ -44,6 +45,7 @@ export const projects: Array<Project> = [
 	},
 	{
 		slug: "nexcall-hrms",
+		liveUrl: "https://hrms.nexcalltech.com",
 		title: "NexCall HRMS",
 		category: "Internal Tool · HR",
 		problem:
@@ -62,6 +64,8 @@ export const projects: Array<Project> = [
 	},
 	{
 		slug: "ourgarden",
+		liveUrl:
+			"https://our-garden-web-backend--our-garden-d2dcf.us-east4.hosted.app/",
 		title: "OurGarden",
 		category: "Marketplace · AI",
 		problem:
@@ -80,6 +84,7 @@ export const projects: Array<Project> = [
 	},
 	{
 		slug: "reneespace",
+		liveUrl: "https://reneespace.com",
 		title: "ReneeSpace",
 		category: "AI · Mental Health · Web App",
 		problem:
@@ -116,6 +121,7 @@ export const projects: Array<Project> = [
 	},
 	{
 		slug: "everlooms",
+		liveUrl: "https://everlooms.com",
 		title: "Everlooms",
 		category: "Web Platform · Headless",
 		problem:

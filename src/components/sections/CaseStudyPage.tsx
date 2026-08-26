@@ -29,12 +29,23 @@ export function CaseStudyPage({ project }: CaseStudyPageProps) {
 				<p className="mt-4 max-w-140 text-base leading-normal text-text-muted">
 					{project.problem}
 				</p>
+				{project.liveUrl && (
+					<Button
+						href={project.liveUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						variant="outline"
+						className="mt-6"
+					>
+						Visit site ↗
+					</Button>
+				)}
 			</Container>
 
 			<Container className="pb-16">
 				<div
 					className={cn(
-						"flex aspect-[21/9] items-center justify-center rounded-xl",
+						"flex aspect-21/9 items-center justify-center rounded-xl",
 						PLACEHOLDER_STRIPE_BG,
 					)}
 				>
