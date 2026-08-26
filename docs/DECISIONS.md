@@ -193,3 +193,70 @@ case needed later"). Their `TeamMember` type used to import from
 `data/team.ts`; since that file is gone, the type is now defined inline in
 `TeamCard.tsx` and re-exported, so the two files stay self-contained and
 still type-check while unused rather than depending on a deleted file.
+
+---
+
+## 2026-08-27 — Content/structure update: carousel, case-study pages, AlsoShipped
+
+Full copy for all 6 case studies was drafted and confirmed by the user
+before wiring (their explicit gate) — flags resolved: carousel shows the
+first 3 projects in array order; Makro and Everlooms get full dedicated
+pages, not homepage-only; ReneeSpace prose stays outcome-focused, no
+architecture/RAG framing (ChromaDB appears only as a stack tag); GymBite
+and CalmSpace descriptions supplied by the user; invented slugs
+(`nexcall-hrms`, `makro-middleware`, `everlooms`) and stack-tag compression
+(`Firebase` instead of the full parenthetical) approved as-is.
+
+**`src/data/projects.ts` shape changed**: `Project` is now `{slug, title,
+category, problem, story, outcomes, stack}` — dropped `blurb`/`solution`/
+`tags`/`href` from the old shape. `href` is now derived as `/${slug}`
+wherever needed (CaseStudyCard, FeaturedWorkCarousel), not stored — one
+fewer place for slug and href to drift apart. Added `otherWork: OtherWork[]`
+(`{name, description}`) for the 4 one-line entries with no page.
+
+**FeaturedWorkStrip replaced by FeaturedWorkCarousel** on the homepage —
+same position (under Hero, above CaseStudyGrid). Inferred rather than
+explicitly stated: the brief described the carousel landing in the exact
+spot FeaturedWorkStrip already occupied, and running both back-to-back
+would be a redundant "featured work" teaser twice. FeaturedWorkStrip kept
+on disk unused (same pattern as TeamGrid/TeamCard), updated to read
+`project.problem` instead of the now-deleted `blurb` field so it still
+type-checks while unused. Carousel itself uses native CSS scroll-snap
+(touch swipe + trackpad scroll for free) plus prev/next buttons for
+mouse-only desktop and keyboard reachability — no drag-physics code, no
+new dependency.
+
+**CaseStudyCard**: added the `01 · category` numbered label (number = array
+index, zero-padded); dropped the old Problem/Solution two-line pair in
+favor of the single `problem` teaser, since `story` (the fuller narrative)
+now lives on the dedicated page, not the grid card. All 6 projects render
+in one uniform grid — did not build a visually distinct "secondary" tier
+for Makro/Everlooms despite the brief's "secondary grid" framing, since
+their content is exactly as complete as the top 4 and a different card
+treatment for 2 of 6 items wasn't clearly asked for. Flagging in case a
+visual split is actually wanted.
+
+**One combined "Also shipped" section**, not two separate tiers — the
+brief's "one-line entries" (Gemini, Barcode Books) and "older
+projects... condensed list" (GymBite, CalmSpace) are structurally
+identical (name + description, no page), so they render as one list rather
+than two near-duplicate mini-sections.
+
+**`CaseStudyPage`** is one shared template component; each of the 6 routes
+(`src/routes/nexcall-portal.tsx` etc.) is a thin wrapper passing its
+`Project` in — avoids duplicating the page layout 6 times.
+
+**Nav fixes required by going multi-page** (not explicitly requested, but
+necessary once real subpages exist): `NAV_LINKS` hrefs changed from
+`#work` to `/#work` (bare hash only resolves on `/`, would silently do
+nothing from a case-study page); the logo lockup is now a link to `/`
+(was a plain div in the single-page source design, where a link would
+have been a no-op).
+
+**Internal case-study links use plain `<a href="/slug">`**, not TanStack
+Router's `<Link>` — `Button` was built anchor-only and used everywhere
+(external, hash, mailto); making it polymorphic for one more link type
+added real complexity for a fully static, prerendered site where a plain
+navigation between two already-static pages is effectively instant anyway.
+Engineering trade-off, not asked for either way — noting since a "real" SPA
+transition would use `Link`.

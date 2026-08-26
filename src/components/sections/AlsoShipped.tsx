@@ -1,7 +1,12 @@
 import { motion } from "motion/react";
 import { Container } from "#/components/ui/Container";
 import type { OtherWork } from "#/data/projects";
-import { revealHidden, revealTransition, revealVisible, useScrollReveal } from "#/lib/useScrollReveal";
+import {
+	revealHidden,
+	revealTransition,
+	revealVisible,
+	useScrollReveal,
+} from "#/lib/useScrollReveal";
 
 export interface AlsoShippedProps {
 	heading: string;
@@ -25,8 +30,12 @@ export function AlsoShipped({ heading, items }: AlsoShippedProps) {
 				<div className="grid grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))] gap-6">
 					{items.map((item) => (
 						<div key={item.name} className="flex flex-col gap-1">
-							<span className="text-base font-semibold text-text">{item.name}</span>
-							<span className="text-sm text-text-muted">{item.description}</span>
+							<span className="text-base font-semibold text-text">
+								{item.name}
+							</span>
+							<span className="text-sm text-text-muted">
+								{item.description}
+							</span>
 						</div>
 					))}
 				</div>

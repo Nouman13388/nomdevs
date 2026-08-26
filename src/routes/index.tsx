@@ -26,7 +26,10 @@ function Home() {
 			<StatStrip stats={stats} />
 			<BeforeAfterCompare {...siteContent.compare} checklist={checklist} />
 			<CaseStudyGrid heading={siteContent.work.heading} projects={projects} />
-			<AlsoShipped heading={siteContent.alsoShipped.heading} items={otherWork} />
+			<AlsoShipped
+				heading={siteContent.alsoShipped.heading}
+				items={otherWork}
+			/>
 			<ServicesSection
 				heading={siteContent.services.heading}
 				services={services}

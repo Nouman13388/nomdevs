@@ -18,7 +18,10 @@ export function CaseStudyPage({ project }: CaseStudyPageProps) {
 
 	return (
 		<>
-			<Container width="narrow" className="flex flex-col items-center pt-24 pb-12 text-center">
+			<Container
+				width="narrow"
+				className="flex flex-col items-center pt-24 pb-12 text-center"
+			>
 				<Tag>{project.category}</Tag>
 				<h1 className="m-0 mt-4 text-[clamp(2rem,6vw,3rem)] font-bold leading-heading tracking-heading">
 					{project.title}
@@ -58,7 +61,10 @@ export function CaseStudyPage({ project }: CaseStudyPageProps) {
 			<Container width="narrow" className="pb-24">
 				<ul className="m-0 flex list-none flex-col gap-3 p-0">
 					{project.outcomes.map((outcome) => (
-						<li key={outcome} className="flex items-start gap-2 text-base text-text">
+						<li
+							key={outcome}
+							className="flex items-start gap-2 text-base text-text"
+						>
 							<span className="text-accent">▸</span>
 							<span>{outcome}</span>
 						</li>

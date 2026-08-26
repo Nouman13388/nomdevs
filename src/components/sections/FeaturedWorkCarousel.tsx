@@ -15,7 +15,10 @@ export interface FeaturedWorkCarouselProps {
  * touch swipe and trackpad scroll; prev/next buttons cover mouse-only
  * desktop users and give it a keyboard-reachable control.
  */
-export function FeaturedWorkCarousel({ eyebrow, projects }: FeaturedWorkCarouselProps) {
+export function FeaturedWorkCarousel({
+	eyebrow,
+	projects,
+}: FeaturedWorkCarouselProps) {
 	const scrollerRef = useRef<HTMLDivElement>(null);
 
 	const scroll = (direction: 1 | -1) => {
@@ -62,10 +65,16 @@ export function FeaturedWorkCarousel({ eyebrow, projects }: FeaturedWorkCarousel
 						<span className="font-mono text-3xl font-bold text-accent">
 							{String(index + 1).padStart(2, "0")}
 						</span>
-						<span className="font-mono text-sm text-text-muted">{project.category}</span>
-						<span className="text-xl font-semibold text-text">{project.title}</span>
+						<span className="font-mono text-sm text-text-muted">
+							{project.category}
+						</span>
+						<span className="text-xl font-semibold text-text">
+							{project.title}
+						</span>
 						<span className="text-sm text-text-muted">{project.problem}</span>
-						<span className="mt-auto text-sm text-accent">View case study →</span>
+						<span className="mt-auto text-sm text-accent">
+							View case study →
+						</span>
 					</Card>
 				))}
 			</div>

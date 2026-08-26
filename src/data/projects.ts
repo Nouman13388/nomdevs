@@ -32,7 +32,13 @@ export const projects: Array<Project> = [
 			"Six roles and atomic lead-claim logic mean no agent ever double-works a lead.",
 			"New code ships automatically on every push, with no manual deploy step.",
 		],
-		stack: ["TanStack Start", "Cloudflare Workers", "D1", "Drizzle ORM", "Better Auth"],
+		stack: [
+			"TanStack Start",
+			"Cloudflare Workers",
+			"D1",
+			"Drizzle ORM",
+			"Better Auth",
+		],
 	},
 	{
 		slug: "nexcall-hrms",
@@ -135,11 +141,13 @@ export interface OtherWork {
 export const otherWork: Array<OtherWork> = [
 	{
 		name: "Gemini AI Voice Agent",
-		description: "An AI voice agent built on Cloudflare Workers using Gemini 2.0 Flash.",
+		description:
+			"An AI voice agent built on Cloudflare Workers using Gemini 2.0 Flash.",
 	},
 	{
 		name: "Barcode Books App",
-		description: "Amazon SP-API integration for barcode-based inventory and book management.",
+		description:
+			"Amazon SP-API integration for barcode-based inventory and book management.",
 	},
 	{
 		name: "GymBite",
@@ -148,6 +156,7 @@ export const otherWork: Array<OtherWork> = [
 	},
 	{
 		name: "CalmSpace",
-		description: "An early mental-wellness app focused on guided relaxation and mood tracking.",
+		description:
+			"An early mental-wellness app focused on guided relaxation and mood tracking.",
 	},
 ];
