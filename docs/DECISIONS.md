@@ -292,3 +292,18 @@ confidentiality framing. One ambiguity flagged and not resolved: the user
 also sent a bare `nexcalltech.com` (no subdomain) that doesn't map cleanly
 to any single project — not used anywhere; asked the user to clarify if it
 was meant to replace one of the two nexcalltech subdomains.
+
+---
+
+## 2026-08-27 — Removed visible email; "Book a Call" mailto's to nomdev8@gmail.com
+
+`hello@nomdevs.com` was shown as visible text under the Contact section's
+button — removed entirely, per explicit instruction (not just hidden,
+deleted from `ContactCTA` and `siteContent.contact`).
+
+Every "Book a Call" button (Nav desktop, Nav mobile, Hero, ContactCTA — 3
+distinct components) now points at a single `BOOK_A_CALL_HREF` constant in
+`lib/constants.ts`: `mailto:nomdev8@gmail.com?subject=Book%20a%20call`.
+One source of truth rather than duplicating the address in each component;
+same pattern already used for `NAV_LINKS`. `ContactCTAProps` dropped its
+`email` prop — it no longer needs one.

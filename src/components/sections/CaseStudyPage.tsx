@@ -43,16 +43,24 @@ export function CaseStudyPage({ project }: CaseStudyPageProps) {
 			</Container>
 
 			<Container className="pb-16">
-				<div
-					className={cn(
-						"flex aspect-21/9 items-center justify-center rounded-xl",
-						PLACEHOLDER_STRIPE_BG,
-					)}
-				>
-					<span className="font-mono text-sm text-text-muted">
-						screenshot — supplied separately
-					</span>
-				</div>
+				{project.screenshot ? (
+					<img
+						src={project.screenshot}
+						alt={`${project.title} screenshot`}
+						className="aspect-21/9 w-full rounded-xl object-cover object-top"
+					/>
+				) : (
+					<div
+						className={cn(
+							"flex aspect-21/9 items-center justify-center rounded-xl",
+							PLACEHOLDER_STRIPE_BG,
+						)}
+					>
+						<span className="font-mono text-sm text-text-muted">
+							screenshot — supplied separately
+						</span>
+					</div>
+				)}
 			</Container>
 
 			<Container width="narrow" className="flex flex-col gap-4 pb-16">

@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { Button } from "#/components/ui/Button";
 import { Container } from "#/components/ui/Container";
 import { Tag } from "#/components/ui/Tag";
+import { BOOK_A_CALL_HREF } from "#/lib/constants";
 
 export interface HeroProps {
 	headline: string;
@@ -51,7 +52,7 @@ export function Hero({ headline, subhead, techStack }: HeroProps) {
 				transition={{ duration: 0.7, ease: "easeOut", delay: 0.3 }}
 				className="mt-8 flex flex-wrap justify-center gap-4"
 			>
-				<Button href="#contact">Book a Call</Button>
+				<Button href={BOOK_A_CALL_HREF}>Book a Call</Button>
 				<Button href="#work" variant="outline">
 					View Work
 				</Button>

@@ -3,6 +3,10 @@ export interface NavLink {
 	label: string;
 }
 
+/** Every "Book a Call" action mailto's here — no visible email shown on the site. */
+export const CONTACT_EMAIL = "nomdev8@gmail.com";
+export const BOOK_A_CALL_HREF = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Book a call")}`;
+
 // Absolute (/#work, not #work) so they still resolve correctly from a
 // case-study page, not just from "/" — needed once the site became
 // multi-page (see docs/DECISIONS.md).

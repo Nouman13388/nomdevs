@@ -10,6 +10,8 @@ export interface Project {
 	stack: Array<string>;
 	/** Live site URL, if the project is publicly visitable. Omit otherwise — the "Visit site" button only renders when this is set. */
 	liveUrl?: string;
+	/** Path under /public to a real screenshot (e.g. "/screenshots/ourgarden.png"). Falls back to the striped placeholder when unset. */
+	screenshot?: string;
 }
 
 /**

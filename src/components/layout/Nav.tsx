@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "#/components/ui/Button";
 import { Container } from "#/components/ui/Container";
 import { Logomark } from "#/components/ui/Logomark";
-import { NAV_LINKS } from "#/lib/constants";
+import { BOOK_A_CALL_HREF, NAV_LINKS } from "#/lib/constants";
 
 /**
  * The source design has no mobile treatment for the link group — at 375px
@@ -47,7 +47,11 @@ export function Nav() {
 				</nav>
 
 				<div className="flex items-center gap-4">
-					<Button href="/#contact" size="sm" className="hidden sm:inline-flex">
+					<Button
+						href={BOOK_A_CALL_HREF}
+						size="sm"
+						className="hidden sm:inline-flex"
+					>
 						Book a Call
 					</Button>
 					<button
@@ -88,7 +92,7 @@ export function Nav() {
 						</a>
 					))}
 					<Button
-						href="/#contact"
+						href={BOOK_A_CALL_HREF}
 						size="sm"
 						className="mt-2 self-start sm:hidden"
 					>

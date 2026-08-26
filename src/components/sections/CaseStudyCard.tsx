@@ -16,16 +16,24 @@ export function CaseStudyCard({ project, index }: CaseStudyCardProps) {
 
 	return (
 		<Card className="flex flex-col overflow-hidden p-0">
-			<div
-				className={cn(
-					"flex aspect-video items-center justify-center",
-					PLACEHOLDER_STRIPE_BG,
-				)}
-			>
-				<span className="font-mono text-sm text-text-muted">
-					case study screenshot
-				</span>
-			</div>
+			{project.screenshot ? (
+				<img
+					src={project.screenshot}
+					alt={`${project.title} screenshot`}
+					className="aspect-video w-full object-cover object-top"
+				/>
+			) : (
+				<div
+					className={cn(
+						"flex aspect-video items-center justify-center",
+						PLACEHOLDER_STRIPE_BG,
+					)}
+				>
+					<span className="font-mono text-sm text-text-muted">
+						case study screenshot
+					</span>
+				</div>
+			)}
 
 			<div className="flex flex-1 flex-col gap-2 p-6">
 				<div className="font-mono text-sm text-text-muted">

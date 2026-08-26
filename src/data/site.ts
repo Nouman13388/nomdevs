@@ -27,6 +27,5 @@ export const siteContent = {
 	},
 	contact: {
 		heading: "Have a project in mind?",
-		email: "hello@nomdevs.com",
 	},
 } as const;
