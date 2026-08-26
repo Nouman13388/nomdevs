@@ -83,11 +83,22 @@ for those, unlike what v3 would have required.
 - `dist/server/` — a Nitro server bundle. Unused: the site has no
   server functions or API routes for it to serve, so it is not deployed.
 
-Cloudflare Pages config: point the project's build output directory at
-`dist/client`, build command `npm run build`. No Workers runtime, no
-bindings, no `wrangler.toml` — this is a plain static-asset deploy, which
-matches the brief's "no server functions, no API routes, no DB" constraint
-without adding Cloudflare-specific tooling the site doesn't need.
+Cloudflare's dashboard now creates static sites through its unified
+"Workers & Pages" → Create a Worker → git-connected flow rather than the
+older, separate Pages product, and that flow always runs a **deploy
+command** (`npx wrangler deploy`) after the build command — so a minimal
+`wrangler.jsonc` is required even for a purely static site:
+
+```jsonc
+{ "name": "nomdevs", "compatibility_date": "2026-08-27", "assets": { "directory": "dist/client" } }
+```
+
+No `main` entry — no Worker script, no server functions, no bindings.
+`assets.directory` alone deploys `dist/client` as static assets served
+directly by the Workers runtime, which is Cloudflare's current
+recommended path for static sites (classic Pages is in maintenance mode).
+Dashboard settings: build command `npm run build`, deploy command
+`npx wrangler deploy`.
 
 ## Content flow
 

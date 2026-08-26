@@ -115,3 +115,25 @@ classes as expected. No component code changed — the bug was entirely in
 running the responsive-verification step rather than treating it as a
 formality — this bug was invisible in code review (the CSS looked
 reasonable in isolation) and only showed up once the page was rendered.
+
+---
+
+## 2026-08-27 — Added `wrangler.jsonc`; deploy path is Workers static assets, not classic Pages
+
+**Spec said / ARCHITECTURE.md originally said:** deploy to Cloudflare Pages,
+"no Workers runtime, no bindings, no `wrangler.toml`."
+
+**Deviation:** the user's Cloudflare dashboard only offered the unified
+"Workers & Pages → Create a Worker" git-connected flow (classic standalone
+Pages project creation is being phased out). That flow always runs a
+**deploy command** (`npx wrangler deploy`) after the build command — which
+fails with no Wrangler config in the repo to say this is a static site or
+where the build output is.
+
+**Fix:** added `wrangler.jsonc` at repo root — `assets.directory:
+"dist/client"`, no `main` entry. This still deploys pure static assets
+(the Workers runtime serves them directly, no Worker script executes) —
+it does not introduce server functions, API routes, or bindings, so the
+"no server functions/API routes/DB" constraint holds. `docs/ARCHITECTURE.md`
+updated to describe this as the actual deploy path instead of classic
+Pages.

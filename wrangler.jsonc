@@ -1,0 +1,14 @@
+{
+	"$schema": "https://unpkg.com/wrangler@latest/config-schema.json",
+	// Static site: no Worker script needed. "assets" alone deploys dist/client
+	// as a Cloudflare Worker serving static assets — no server functions, no
+	// API routes, no bindings (matches docs/ARCHITECTURE.md's "no Workers
+	// runtime" call from setup; Cloudflare's dashboard "Create a Worker" flow
+	// with a build+deploy command is the current path to that, replacing the
+	// separate classic Pages product).
+	"name": "nomdevs",
+	"compatibility_date": "2026-08-27",
+	"assets": {
+		"directory": "dist/client"
+	}
+}
