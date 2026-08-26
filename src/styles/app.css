@@ -1,0 +1,37 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+/*
+ * Tailwind v4 puts its own reset/utilities inside cascade layers. Custom
+ * base styles need to live in `@layer base` too — left unlayered, they'd
+ * beat every utility class (any layered rule loses to unlayered ones
+ * regardless of specificity), which broke text-color utilities on <a>
+ * elements site-wide until caught in the responsive verification pass.
+ */
+@layer base {
+	* {
+		box-sizing: border-box;
+	}
+
+	html,
+	body,
+	#app {
+		min-height: 100%;
+	}
+
+	html {
+		scroll-behavior: smooth;
+	}
+
+	body {
+		margin: 0;
+		background: var(--color-bg);
+		color: var(--color-text);
+		font-family: var(--font-sans);
+	}
+
+	a {
+		color: var(--color-accent);
+		text-decoration: none;
+	}
+}
