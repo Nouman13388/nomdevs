@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EverloomsRouteImport } from './routes/everlooms'
+import { Route as MakroMiddlewareRouteImport } from './routes/makro-middleware'
+import { Route as NexcallHrmsRouteImport } from './routes/nexcall-hrms'
+import { Route as NexcallPortalRouteImport } from './routes/nexcall-portal'
+import { Route as OurgardenRouteImport } from './routes/ourgarden'
+import { Route as ReneespaceRouteImport } from './routes/reneespace'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EverloomsRoute = EverloomsRouteImport.update({
+  id: '/everlooms',
+  path: '/everlooms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MakroMiddlewareRoute = MakroMiddlewareRouteImport.update({
+  id: '/makro-middleware',
+  path: '/makro-middleware',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NexcallHrmsRoute = NexcallHrmsRouteImport.update({
+  id: '/nexcall-hrms',
+  path: '/nexcall-hrms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NexcallPortalRoute = NexcallPortalRouteImport.update({
+  id: '/nexcall-portal',
+  path: '/nexcall-portal',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OurgardenRoute = OurgardenRouteImport.update({
+  id: '/ourgarden',
+  path: '/ourgarden',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReneespaceRoute = ReneespaceRouteImport.update({
+  id: '/reneespace',
+  path: '/reneespace',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/everlooms': typeof EverloomsRoute
+  '/makro-middleware': typeof MakroMiddlewareRoute
+  '/nexcall-hrms': typeof NexcallHrmsRoute
+  '/nexcall-portal': typeof NexcallPortalRoute
+  '/ourgarden': typeof OurgardenRoute
+  '/reneespace': typeof ReneespaceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/everlooms': typeof EverloomsRoute
+  '/makro-middleware': typeof MakroMiddlewareRoute
+  '/nexcall-hrms': typeof NexcallHrmsRoute
+  '/nexcall-portal': typeof NexcallPortalRoute
+  '/ourgarden': typeof OurgardenRoute
+  '/reneespace': typeof ReneespaceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/everlooms': typeof EverloomsRoute
+  '/makro-middleware': typeof MakroMiddlewareRoute
+  '/nexcall-hrms': typeof NexcallHrmsRoute
+  '/nexcall-portal': typeof NexcallPortalRoute
+  '/ourgarden': typeof OurgardenRoute
+  '/reneespace': typeof ReneespaceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/everlooms'
+    | '/makro-middleware'
+    | '/nexcall-hrms'
+    | '/nexcall-portal'
+    | '/ourgarden'
+    | '/reneespace'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/everlooms'
+    | '/makro-middleware'
+    | '/nexcall-hrms'
+    | '/nexcall-portal'
+    | '/ourgarden'
+    | '/reneespace'
+  id:
+    | '__root__'
+    | '/'
+    | '/everlooms'
+    | '/makro-middleware'
+    | '/nexcall-hrms'
+    | '/nexcall-portal'
+    | '/ourgarden'
+    | '/reneespace'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EverloomsRoute: typeof EverloomsRoute
+  MakroMiddlewareRoute: typeof MakroMiddlewareRoute
+  NexcallHrmsRoute: typeof NexcallHrmsRoute
+  NexcallPortalRoute: typeof NexcallPortalRoute
+  OurgardenRoute: typeof OurgardenRoute
+  ReneespaceRoute: typeof ReneespaceRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,21 +130,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/everlooms': {
+      id: '/everlooms'
+      path: '/everlooms'
+      fullPath: '/everlooms'
+      preLoaderRoute: typeof EverloomsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/makro-middleware': {
+      id: '/makro-middleware'
+      path: '/makro-middleware'
+      fullPath: '/makro-middleware'
+      preLoaderRoute: typeof MakroMiddlewareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/nexcall-hrms': {
+      id: '/nexcall-hrms'
+      path: '/nexcall-hrms'
+      fullPath: '/nexcall-hrms'
+      preLoaderRoute: typeof NexcallHrmsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/nexcall-portal': {
+      id: '/nexcall-portal'
+      path: '/nexcall-portal'
+      fullPath: '/nexcall-portal'
+      preLoaderRoute: typeof NexcallPortalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ourgarden': {
+      id: '/ourgarden'
+      path: '/ourgarden'
+      fullPath: '/ourgarden'
+      preLoaderRoute: typeof OurgardenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reneespace': {
+      id: '/reneespace'
+      path: '/reneespace'
+      fullPath: '/reneespace'
+      preLoaderRoute: typeof ReneespaceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EverloomsRoute: EverloomsRoute,
+  MakroMiddlewareRoute: MakroMiddlewareRoute,
+  NexcallHrmsRoute: NexcallHrmsRoute,
+  NexcallPortalRoute: NexcallPortalRoute,
+  OurgardenRoute: OurgardenRoute,
+  ReneespaceRoute: ReneespaceRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { createStart } from '@tanstack/react-start'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-  }
-}
