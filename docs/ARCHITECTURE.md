@@ -13,6 +13,7 @@
 | UI runtime | React | 19.2.8 |
 | Toolchain | Biome (lint + format, single tool) | `@biomejs/biome` 2.4.5 |
 | Language | TypeScript, strict | 6.0.3 |
+| `cn()` helper | `clsx` + `tailwind-merge` (resolves conflicting utility classes) | `clsx` 2.1.1, `tailwind-merge` 3.6.0 |
 
 No server functions, no API routes, no database. Every route is
 prerendered to static HTML at build time (see **Static output** below) and
@@ -37,22 +38,35 @@ npx @tanstack/cli@latest create nomdevs --framework react \
 ```
 src/
   components/
-    ui/              # primitives: Button, Tag, Card, Container, CountUp
+    ui/              # primitives: Button, Tag, Card, Container, CountUp, Logomark
     layout/          # Nav, Footer
-    sections/        # Hero, FeaturedWorkStrip, StatStrip, BeforeAfterCompare,
-                      # CaseStudyGrid, ServicesSection, TeamGrid, ContactCTA
-  data/              # projects.ts, team.ts, services.ts — typed content, zero JSX
-  lib/               # utils, cn() helper, constants
-  routes/            # TanStack file-based routes (__root.tsx, index.tsx)
-  styles/            # app.css (Tailwind entry), tokens.css (design tokens)
+    sections/        # Hero, FeaturedWorkCarousel, StatStrip, BeforeAfterCompare,
+                      # CaseStudyGrid, CaseStudyCard, CaseStudyPage, AlsoShipped,
+                      # ServicesSection, ContactCTA
+                      # (FeaturedWorkStrip, TeamGrid, TeamCard also live here,
+                      # unused — kept on disk per explicit instruction, not deleted)
+  data/              # projects.ts, services.ts, compare.ts, stats.ts, socials.ts,
+                      # site.ts — typed content, zero JSX (team.ts removed, Team
+                      # section deleted from the homepage)
+  lib/               # cn.ts, constants.ts (nav links, CONTACT_EMAIL,
+                      # BOOK_A_CALL_HREF, the placeholder-stripe pattern),
+                      # useScrollReveal.ts
+  routes/            # TanStack file-based routes: __root.tsx, index.tsx, and
+                      # one file per case study (nexcall-portal.tsx,
+                      # nexcall-hrms.tsx, ourgarden.tsx, reneespace.tsx,
+                      # makro-middleware.tsx, everlooms.tsx) — each a thin
+                      # wrapper passing its Project into CaseStudyPage
+public/
+  screenshots/       # project screenshots, WebP only (see Images below)
+  favicon.svg/.png, apple-touch-icon.png
 docs/                # specs, decisions, architecture (this file)
 ```
 
-`src/components/sections/` holds eight sections, not the six named in the
-original build order — `FeaturedWorkStrip` and `BeforeAfterCompare` were
-added by explicit decision (`docs/DECISIONS.md`). No new top-level folder
-pattern was introduced to accommodate this; they live in the same
-`sections/` directory as everything else.
+The site grew from a single page to eight sections plus six case-study
+routes over several content passes — see `docs/DECISIONS.md` for the full
+history of each addition and why. No new top-level folder pattern was ever
+introduced to accommodate this; new content lives in the same `sections/`,
+`data/`, and `routes/` directories as everything else.
 
 ## Styling: Tailwind v4, CSS-first
 
@@ -106,6 +120,40 @@ Data lives in typed files under `src/data/` (zero JSX). Section components
 in `src/components/sections/` accept that data as props — they contain no
 hardcoded copy. `src/routes/index.tsx` is the only place that imports from
 `src/data/` and wires it into the section components, in design order.
+
+Each case-study route follows the same pattern: look up its `Project` from
+`src/data/projects.ts` by slug, pass it to the shared `CaseStudyPage`
+template. The template lives in one place; the six route files are only
+wiring.
+
+Site-wide structural values that aren't "content" in the varies-by-section
+sense — nav links, the contact email, the placeholder stripe pattern —
+live in `src/lib/constants.ts` and are imported directly, not passed down
+as props (matches how `NAV_LINKS` was already handled). `BOOK_A_CALL_HREF`
+is one such constant: every "Book a Call" button across Nav, Hero, and
+ContactCTA points at it, so the mailto target has a single source of
+truth.
+
+## Images
+
+`public/screenshots/` holds one image per project with a real screenshot,
+named by slug (`nexcall-portal.webp`, etc.), referenced from
+`Project.screenshot` in `projects.ts`. **WebP only** — no source PNGs are
+committed. Projects with no `screenshot` set (currently none) fall back to
+the striped placeholder pattern in `CaseStudyCard`/`CaseStudyPage`.
+
+Conversion path, for reproducing this later: this machine has no
+`cwebp`/ImageMagick, and macOS's `sips` can't export WebP either. Images
+were converted via headless Chromium — draw the PNG into an offscreen
+`<canvas>` at a 1600px max width (screenshots straight off a Retina
+display run ~3000px wide, far more than any card ever renders at) and
+export with `canvas.toDataURL('image/webp', 0.82)`. No new dependency;
+same technique used for the favicon.
+
+Makro SCO Middleware has no real screenshot (confidential project, no
+public URL) — its image is a generated abstract diagram, explicitly
+labeled "illustrative diagram" in the image itself so it's never mistaken
+for a real product screenshot.
 
 ## Git workflow
 

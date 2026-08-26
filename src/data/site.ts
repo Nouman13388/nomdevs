@@ -22,8 +22,9 @@ export const siteContent = {
 		eyebrow: "Featured work",
 	},
 	compare: {
-		heading: "Before it's vibe-coded. After it's production-ready.",
-		subhead: "AI can write code fast. Drag to see what it usually skips.",
+		heading: "Before it's AI-generated. After it's engineer-reviewed.",
+		subhead:
+			"AI can write code fast. Here's what a senior engineer still checks.",
 	},
 	work: {
 		heading: "Selected work",

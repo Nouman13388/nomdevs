@@ -381,3 +381,29 @@ Original PNGs deleted after conversion — only `.webp` files remain in
 `CaseStudyCard`/`CaseStudyPage` needed no code changes — `project.screenshot`
 was already a plain path string; only the data values changed from `.png`
 placeholders to real `.webp` files.
+
+---
+
+## 2026-08-27 — Compare section copy matured; ARCHITECTURE.md refreshed
+
+**Copy**: "Before it's vibe-coded. After it's production-ready." replaced
+with "Before it's AI-generated. After it's engineer-reviewed." — same
+structure, same mechanism, same intent, but "vibe-coded" read as slang
+that undercuts an engineering firm's own credibility making the argument.
+Subhead changed from "...Drag to see what it usually skips" (frames AI as
+simply deficient) to "...Here's what a senior engineer still checks"
+(frames human review as the value-add, not AI as inherently sloppy) — more
+accurate to how the site actually uses AI tools itself, and reads as
+confident rather than dismissive.
+
+**`docs/ARCHITECTURE.md` refreshed** to match everything built since it
+was first written: folder structure now lists the real current component
+set (FeaturedWorkCarousel not Strip, CaseStudyCard/CaseStudyPage,
+AlsoShipped, Logomark; FeaturedWorkStrip/TeamGrid/TeamCard noted as
+unused-but-kept), the six case-study route files, `clsx`/`tailwind-merge`
+added to the stack table, a new **Content flow** paragraph on the
+route → CaseStudyPage pattern and the `BOOK_A_CALL_HREF`-style constant
+pattern, and a new **Images** section documenting the `public/screenshots/`
+convention and the no-cwebp/headless-Chromium WebP conversion path for
+future reference. `docs/DESIGN_SPEC.md` intentionally left untouched — it
+documents the original design extraction and stays historical.
