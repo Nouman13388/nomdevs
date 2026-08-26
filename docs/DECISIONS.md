@@ -307,3 +307,41 @@ distinct components) now points at a single `BOOK_A_CALL_HREF` constant in
 One source of truth rather than duplicating the address in each component;
 same pattern already used for `NAV_LINKS`. `ContactCTAProps` dropped its
 `email` prop — it no longer needs one.
+
+---
+
+## 2026-08-27 — Generated Makro illustration; broadened skills; AI/vibe-coding positioning
+
+**Makro screenshot**: no real screenshot is possible (confidential, no
+public URL). Generated an abstract SVG diagram instead — request → event
+queue → state machine → settled, in the site's own tokens — explicitly
+labeled "illustrative diagram — implementation details under NDA" so it's
+never mistaken for a real product screenshot. Rasterized the same way as
+the favicon (headless-browser screenshot of the SVG, no new dependency).
+Saved to `public/screenshots/makro-middleware.png`.
+
+**Hero skills tags** changed from specific frameworks/vendors
+(`React, Node.js, PostgreSQL, AWS`) to languages + broad capability areas
+(`TypeScript, Python, Dart, Cloud Infrastructure, AI Integration`) — per
+instruction to mention TypeScript/Python/Dart by name and make the row
+read as generic capability rather than one fixed stack (matches the actual
+spread of languages/domains across the 6 case studies: TypeScript
+everywhere, Dart from OurGarden's original Flutter app, Python as a
+general backend/AI capability).
+
+**Added a 4th service, "Quality & Maintenance"** — explicit ask to mention
+quality/maintenance as an offering, not just build work. One bullet names
+the AI comparison directly ("human code review on every change, not just
+AI-generated output").
+
+**AI/vibe-coding comparison**: rather than building a new section that
+would duplicate what `BeforeAfterCompare` already demonstrates concretely,
+sharpened that section's existing heading/subhead to name the comparison
+explicitly (`"Before it's vibe-coded. After it's production-ready."` /
+`"AI can write code fast. Drag to see what it usually skips."`) and added
+a 6th checklist row, "Code review: auto-accepted, unreviewed" →
+"reviewed by senior engineers" — the most direct, concrete statement of
+the gap. The existing checklist (auth, payments, data, secrets, deploys)
+was already exactly what vibe-coded apps typically get wrong, so this is
+framing what's there rather than adding a redundant new argument
+elsewhere.

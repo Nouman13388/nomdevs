@@ -105,6 +105,7 @@ export const projects: Array<Project> = [
 	},
 	{
 		slug: "makro-middleware",
+		screenshot: "/screenshots/makro-middleware.png",
 		title: "Makro SCO Middleware",
 		category: "Payment Middleware · Enterprise",
 		problem:

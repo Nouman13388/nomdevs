@@ -26,4 +26,9 @@ export const checklist: Array<ChecklistItem> = [
 		before: "no rollback plan",
 		after: "CI/CD, instant rollback",
 	},
+	{
+		label: "Code review",
+		before: "auto-accepted, unreviewed",
+		after: "reviewed by senior engineers",
+	},
 ];

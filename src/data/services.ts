@@ -39,4 +39,15 @@ export const services: Array<Service> = [
 		],
 		timeframe: "ongoing, month to month",
 	},
+	{
+		name: "Quality & Maintenance",
+		desc: "Keep production software reliable long after launch, not just at launch.",
+		bullets: [
+			"Human code review on every change, not just AI-generated output",
+			"Security patches and dependency updates on a schedule",
+			"Monitoring and incident response, not silent failures",
+			"Same engineers who built it, still on call for it",
+		],
+		timeframe: "ongoing, month to month",
+	},
 ];

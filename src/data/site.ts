@@ -7,14 +7,23 @@ export const siteContent = {
 		headline: "Software built by engineers who ship.",
 		subhead:
 			"nomdevs designs and builds production software for founders and product teams. No hand-offs, no filler.",
-		techStack: ["TypeScript", "React", "Node.js", "PostgreSQL", "AWS"],
+		// Languages + broad capability areas rather than specific frameworks/
+		// vendors, reflecting the actual spread across case studies (web,
+		// mobile, cloud, AI) instead of any one stack.
+		techStack: [
+			"TypeScript",
+			"Python",
+			"Dart",
+			"Cloud Infrastructure",
+			"AI Integration",
+		],
 	},
 	featuredWork: {
 		eyebrow: "Featured work",
 	},
 	compare: {
-		heading: "Before it ships. After it's production-ready.",
-		subhead: "Drag to compare.",
+		heading: "Before it's vibe-coded. After it's production-ready.",
+		subhead: "AI can write code fast. Drag to see what it usually skips.",
 	},
 	work: {
 		heading: "Selected work",
