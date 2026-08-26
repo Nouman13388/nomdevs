@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "#/components/ui/Button";
 import { Container } from "#/components/ui/Container";
+import { Logomark } from "#/components/ui/Logomark";
 import { NAV_LINKS } from "#/lib/constants";
 
 /**
@@ -17,13 +18,16 @@ export function Nav() {
 		<header className="sticky top-0 z-50 border-b border-border bg-bg/85 backdrop-blur">
 			<Container className="flex h-18 items-center justify-between">
 				{/* Plain lockup, not a link — matches the source design (a div, not an anchor). */}
-				<div className="flex flex-col leading-tight">
-					<span className="text-base font-bold tracking-logo text-text">
-						nomdevs
-					</span>
-					<span className="font-mono text-sm text-text-muted">
-						product engineering
-					</span>
+				<div className="flex items-center gap-2">
+					<Logomark className="size-8 shrink-0" />
+					<div className="flex flex-col leading-tight">
+						<span className="text-base font-bold tracking-logo text-text">
+							nomdevs
+						</span>
+						<span className="font-mono text-sm text-text-muted">
+							product engineering
+						</span>
+					</div>
 				</div>
 
 				<nav className="hidden items-center gap-8 md:flex">

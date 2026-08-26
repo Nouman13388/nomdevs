@@ -137,3 +137,30 @@ it does not introduce server functions, API routes, or bindings, so the
 "no server functions/API routes/DB" constraint holds. `docs/ARCHITECTURE.md`
 updated to describe this as the actual deploy path instead of classic
 Pages.
+
+---
+
+## 2026-08-27 — Added a logomark (favicon + Nav/Footer)
+
+**Not in the source design at all** — `nomdevs.dc.html` has no logo, only
+the "nomdevs" text lockup. User asked for a favicon and a logo.
+
+**Design:** a `>` prompt with a cursor bar (`> _`) — a terminal-prompt
+motif, matching the mono/terminal language already established elsewhere
+(JetBrains Mono tagline, the ⇄ drag handle, the `▸`/`–`/`→` glyphs used
+throughout). Not commissioned through Claude Design — there's no tool
+available here that can ask its agent to originate a new creative concept
+(the DesignSync tool only reads/writes files into an existing project); a
+simple on-brand mark drawn directly as SVG paths was faster and just as
+on-brand, given the tokens were already fully specified.
+
+**Implementation:**
+- `public/favicon.svg` (+ `favicon.png`/`apple-touch-icon.png` fallbacks,
+  rasterized via a headless-browser screenshot of the SVG rather than
+  adding an image-processing dependency) — literal hex values, since
+  favicons load as standalone files with no CSS context to pull
+  `var(--color-*)` from.
+- `src/components/ui/Logomark.tsx` — same shape as an inline component for
+  Nav/Footer, using `var(--color-*)` (not literal hex) so it stays tied to
+  `tokens.css` if the palette ever changes. The two must be updated
+  together by hand; there's no build step generating one from the other.
