@@ -8,6 +8,8 @@ export interface Project {
 	story: string;
 	outcomes: Array<string>;
 	stack: Array<string>;
+	/** Live site URL, if the project is publicly visitable. Omit otherwise — the "Visit site" button only renders when this is set. */
+	liveUrl?: string;
 }
 
 /**

@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Button } from "#/components/ui/Button";
 import { Card } from "#/components/ui/Card";
 import { Container } from "#/components/ui/Container";
 import type { Project } from "#/data/projects";
@@ -14,6 +15,10 @@ export interface FeaturedWorkCarouselProps {
  * disk unused — see docs/DECISIONS.md). Native CSS scroll-snap handles
  * touch swipe and trackpad scroll; prev/next buttons cover mouse-only
  * desktop users and give it a keyboard-reachable control.
+ *
+ * The card itself isn't a link (unlike FeaturedWorkStrip) — it holds two
+ * independent actions (live site + case study), and nesting a link inside
+ * a whole-card link would be invalid HTML.
  */
 export function FeaturedWorkCarousel({
 	eyebrow,
@@ -54,12 +59,11 @@ export function FeaturedWorkCarousel({
 
 			<div
 				ref={scrollerRef}
-				className="flex snap-x snap-mandatory gap-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+				className="flex snap-x snap-mandatory gap-6 overflow-x-auto scrollbar-none"
 			>
 				{projects.map((project, index) => (
 					<Card
 						key={project.slug}
-						href={`/${project.slug}`}
 						className="flex w-[85%] shrink-0 snap-center flex-col gap-3 sm:w-[45%] lg:w-[31%]"
 					>
 						<span className="font-mono text-3xl font-bold text-accent">
@@ -72,9 +76,26 @@ export function FeaturedWorkCarousel({
 							{project.title}
 						</span>
 						<span className="text-sm text-text-muted">{project.problem}</span>
-						<span className="mt-auto text-sm text-accent">
-							View case study →
-						</span>
+						<div className="mt-auto flex flex-wrap items-center gap-4 pt-2">
+							{project.liveUrl && (
+								<Button
+									href={project.liveUrl}
+									target="_blank"
+									rel="noopener noreferrer"
+									variant="outline"
+									size="sm"
+								>
+									Visit site ↗
+								</Button>
+							)}
+							<Button
+								href={`/${project.slug}`}
+								variant="ghost"
+								className="font-semibold"
+							>
+								View case study →
+							</Button>
+						</div>
 					</Card>
 				))}
 			</div>
