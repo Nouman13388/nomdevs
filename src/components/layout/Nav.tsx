@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "#/components/ui/Button";
 import { Container } from "#/components/ui/Container";
-import { Logomark } from "#/components/ui/Logomark";
+import { Wordmark } from "#/components/ui/Wordmark";
 import { BOOK_A_CALL_HREF, NAV_LINKS } from "#/lib/constants";
 
 /**
@@ -22,16 +22,11 @@ export function Nav() {
 				 * made sense on a single-page site, but a logo that doesn't return
 				 * home reads as broken once there are real subpages.
 				 */}
-				<a href="/" className="flex items-center gap-2">
-					<Logomark className="size-8 shrink-0" />
-					<div className="flex flex-col leading-tight">
-						<span className="text-base font-bold tracking-logo text-text">
-							nomdevs
-						</span>
-						<span className="font-mono text-sm text-text-muted">
-							product engineering
-						</span>
-					</div>
+				<a href="/" className="flex flex-col gap-1 leading-tight">
+					<Wordmark className="h-6 w-auto" />
+					<span className="font-mono text-sm text-text-muted">
+						product engineering
+					</span>
 				</a>
 
 				<nav className="hidden items-center gap-8 md:flex">

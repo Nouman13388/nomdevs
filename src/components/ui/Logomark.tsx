@@ -3,9 +3,14 @@ import type { ComponentPropsWithoutRef } from "react";
 export type LogomarkProps = ComponentPropsWithoutRef<"svg">;
 
 /**
- * The "> _" terminal-prompt mark — same shape as public/favicon.svg, kept
- * as inline JSX here so Nav/Footer render it without an extra asset
- * request. Update both together if the mark ever changes.
+ * The "> _" terminal-prompt mark — same shape as public/favicon.svg.
+ *
+ * No longer used inline in Nav/Footer (replaced by the Wordmark lockup —
+ * see docs/DECISIONS.md), but its shape still lives on as the favicon and
+ * apple-touch-icon: a wordmark can't work as a small square tab icon, so
+ * this mark kept that job. Component kept unused rather than deleted, in
+ * case a compact icon slot is needed again — update public/favicon.svg
+ * together with this if the mark ever changes.
  */
 export function Logomark(props: LogomarkProps) {
 	return (

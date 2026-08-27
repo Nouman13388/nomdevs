@@ -407,3 +407,35 @@ pattern, and a new **Images** section documenting the `public/screenshots/`
 convention and the no-cwebp/headless-Chromium WebP conversion path for
 future reference. `docs/DESIGN_SPEC.md` intentionally left untouched — it
 documents the original design extraction and stays historical.
+
+---
+
+## 2026-08-28 — New wordmark logo replaces icon+text lockup
+
+User dropped a draft `public/logo.svg` — a `<nom.devs/>` code-tag wordmark
+(mono font, angle brackets around the name, accent dot). Asked for
+feedback first; user then said to do what I thought best.
+
+**Issues in the draft, fixed:** it used blue (`#2563eb`) against an
+assumed light background — this site is dark-mode-only with a mint accent,
+so black-on-transparent text would have been invisible and the blue would
+have clashed with every other accent use on the site. Recolored: brackets
++ dot to `var(--color-accent)` (mint), name text to `var(--color-text)`
+(off-white). The `viewBox` also had ~120px of dead space on each side of
+the actual glyphs; remeasured the true bounding box by rendering it
+(headless Chromium, `getBBox()`) and cropped to `-6 -11 450 76`.
+
+**Decision: wordmark replaces the icon+text lockup in Nav and Footer**
+(`Logomark` + "nomdevs" text → `Wordmark` alone, tagline unchanged below
+it). **The `>_` terminal mark stays as the favicon** — a wide wordmark
+can't work as a small square tab icon, so this isn't two competing logos,
+it's the standard wordmark/icon split (same pattern as e.g. Stripe or
+Vercel: full lockup for the header, compact mark for the favicon).
+`Logomark.tsx` kept on disk, unused, per the repo's established pattern
+for superseded-but-not-deleted components — its shape still backs
+`favicon.svg`/`favicon.png`/`apple-touch-icon.png`, unchanged.
+
+Same split as the existing marks: `public/logo.svg` (static, literal hex,
+for contexts with no CSS) + `src/components/ui/Wordmark.tsx` (inline JSX,
+`var(--color-*)`, used in Nav/Footer) — both must be updated together if
+the mark changes, same as `Logomark.tsx`/`favicon.svg` already were.
