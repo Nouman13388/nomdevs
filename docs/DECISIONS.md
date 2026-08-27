@@ -506,3 +506,18 @@ before, styled as unobtrusive mono eyebrow labels matching the pattern
 already used for "Featured work" — improves semantic structure and
 keyword relevance on what were previously heading-less detail pages,
 with no visible design change beyond three small labels.
+
+---
+
+## 2026-08-28 — Restored favicon.png (deleted directly, broke two references)
+
+`public/favicon.png` was deleted directly (not by me) and pushed. It's
+still referenced in two places: the `<link rel="icon" type="image/png">`
+tag in `__root.tsx` and the JSON-LD `logo` field in the Organization
+schema — both would 404 once this reached production. Regenerated it from
+`public/favicon.svg` via the same headless-Chromium rasterization used
+originally; the result is byte-identical in size (964 bytes) to the
+deleted file, confirming it's the same asset. If the deletion was
+deliberate (e.g. relying on the SVG favicon alone, which every modern
+browser supports), say so and I'll remove the PNG `<link>` and the
+`logo` reference properly instead of restoring the file.
