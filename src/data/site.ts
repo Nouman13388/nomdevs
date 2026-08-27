@@ -3,6 +3,11 @@
 // not inline in components, per the "never inline content in components"
 // rule — src/routes/index.tsx only imports and wires this up.
 export const siteContent = {
+	seo: {
+		title: "nomdevs - Software Engineering for Founders and Product Teams",
+		description:
+			"nomdevs designs and builds production software for founders and product teams. No hand-offs, no filler.",
+	},
 	hero: {
 		headline: "Software built by engineers who ship.",
 		subhead:

@@ -3,7 +3,7 @@
 ## Stack
 
 | Layer | Choice | Version (resolved) |
-|---|---|---|
+| --- | --- | --- |
 | Framework | TanStack Start (React) | `@tanstack/react-start` 1.168.49 |
 | Router | TanStack Router (file-based) | `@tanstack/react-router` 1.170.32 |
 | Build | Vite | 8.2.2 |
@@ -154,6 +154,28 @@ Makro SCO Middleware has no real screenshot (confidential project, no
 public URL) — its image is a generated abstract diagram, explicitly
 labeled "illustrative diagram" in the image itself so it's never mistaken
 for a real product screenshot.
+
+## SEO
+
+Every route provides its own `title`/description/Open Graph/canonical
+explicitly via `pageHead()` in `src/lib/seo.ts` — there's no shared
+default that a route silently inherits or needs to override. `__root.tsx`
+only carries page-independent tags (charset, viewport) and links
+(favicons, fonts, stylesheet).
+
+- Case-study routes pass `image: project.screenshot` to `pageHead()`, so
+  `og:image`/`twitter:image` point at each project's real screenshot.
+  The homepage has no such asset, so it falls back to
+  `public/og-image.png` (a generated 1200x630 banner — PNG, not WebP,
+  specifically for maximum social-scraper compatibility).
+- Organization JSON-LD lives directly in `RootDocument`'s `<head>` (plain
+  `<script type="application/ld+json">`, not the route `head()` API's
+  `scripts` field — that field exists but isn't typed as concretely as
+  `meta`/`links`). No `sameAs` (social links are still placeholders) and
+  no `contactPoint`/email (deliberately hidden sitewide).
+- `public/robots.txt` and `public/sitemap.xml` are hand-written and
+  hand-maintained — a new case-study route means adding it to the
+  sitemap manually, same trade-off as the favicon/logo asset pairs.
 
 ## Git workflow
 

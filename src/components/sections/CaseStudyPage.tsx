@@ -57,13 +57,14 @@ export function CaseStudyPage({ project }: CaseStudyPageProps) {
 						)}
 					>
 						<span className="font-mono text-sm text-text-muted">
-							screenshot — supplied separately
+							Screenshot coming soon
 						</span>
 					</div>
 				)}
 			</Container>
 
 			<Container width="narrow" className="flex flex-col gap-4 pb-16">
+				<h2 className="m-0 font-mono text-sm text-text-muted">The story</h2>
 				{paragraphs.map((paragraph) => (
 					<p key={paragraph} className="m-0 text-base leading-normal text-text">
 						{paragraph}
@@ -71,13 +72,17 @@ export function CaseStudyPage({ project }: CaseStudyPageProps) {
 				))}
 			</Container>
 
-			<Container width="narrow" className="flex flex-wrap gap-2 pb-16">
-				{project.stack.map((tech) => (
-					<Tag key={tech}>{tech}</Tag>
-				))}
+			<Container width="narrow" className="flex flex-col gap-3 pb-16">
+				<h2 className="m-0 font-mono text-sm text-text-muted">Stack</h2>
+				<div className="flex flex-wrap gap-2">
+					{project.stack.map((tech) => (
+						<Tag key={tech}>{tech}</Tag>
+					))}
+				</div>
 			</Container>
 
 			<Container width="narrow" className="pb-24">
+				<h2 className="m-0 mb-3 font-mono text-sm text-text-muted">Outcomes</h2>
 				<ul className="m-0 flex list-none flex-col gap-3 p-0">
 					{project.outcomes.map((outcome) => (
 						<li

@@ -4,25 +4,36 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
 import { Footer } from "#/components/layout/Footer";
 import { Nav } from "#/components/layout/Nav";
+import { SITE_URL } from "#/lib/constants";
 import appCss from "../styles/app.css?url";
 
+// Organization structured data (schema.org) — no `sameAs` (the social
+// links in data/socials.ts are still "#" placeholders; publishing fake
+// profile URLs in structured data is worse than omitting the field) and
+// no `contactPoint`/email (the email is deliberately not shown anywhere
+// on the site — see docs/DECISIONS.md — putting it in JSON-LD would
+// undo that).
+const organizationSchema = {
+	"@context": "https://schema.org",
+	"@type": "Organization",
+	name: "nomdevs",
+	url: SITE_URL,
+	logo: `${SITE_URL}/favicon.png`,
+	description:
+		"nomdevs designs and builds production software for founders and product teams.",
+};
+
 export const Route = createRootRoute({
+	// Only truly page-independent tags/links live here. Title, description,
+	// canonical, and Open Graph are per-route (see lib/seo.ts) — every route
+	// calls pageHead() explicitly rather than relying on override/merge
+	// semantics for something as important as the title tag.
 	head: () => ({
 		meta: [
-			{
-				charSet: "utf-8",
-			},
+			{ charSet: "utf-8" },
 			{
 				name: "viewport",
 				content: "width=device-width, initial-scale=1",
-			},
-			{
-				title: "nomdevs — product engineering",
-			},
-			{
-				name: "description",
-				content:
-					"nomdevs designs and builds production software for founders and product teams. No hand-offs, no filler.",
 			},
 		],
 		links: [
@@ -48,6 +59,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 		<html lang="en">
 			<head>
 				<HeadContent />
+				<script type="application/ld+json">
+					{JSON.stringify(organizationSchema)}
+				</script>
 			</head>
 			<body>
 				<Nav />

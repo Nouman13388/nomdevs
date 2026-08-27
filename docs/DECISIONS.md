@@ -70,7 +70,7 @@ SpotlightCard, GradientText, AnimatedList), checked each against
 `nomdevs.dc.html` directly:
 
 | Component | Interaction it provides | Present in the design? |
-|---|---|---|
+| --- | --- | --- |
 | CountUp | numeric count-up on scroll into view | ✅ yes — `StatStrip`'s `animateCounts()` does exactly this |
 | SplitText | per-character text reveal | ❌ no — hero uses one whole-block `fadeInUp` per line/group, staggered by delay, never per-character |
 | GradientText | animated gradient-fill text | ❌ no — every text color in the palette is a flat solid, no gradient anywhere |
@@ -155,6 +155,7 @@ simple on-brand mark drawn directly as SVG paths was faster and just as
 on-brand, given the tokens were already fully specified.
 
 **Implementation:**
+
 - `public/favicon.svg` (+ `favicon.png`/`apple-touch-icon.png` fallbacks,
   rasterized via a headless-browser screenshot of the SVG rather than
   adding an image-processing dependency) — literal hex values, since
@@ -295,7 +296,7 @@ was meant to replace one of the two nexcalltech subdomains.
 
 ---
 
-## 2026-08-27 — Removed visible email; "Book a Call" mailto's to nomdev8@gmail.com
+## 2026-08-27 — Removed visible email; "Book a Call" mailto's to <nomdev8@gmail.com>
 
 `hello@nomdevs.com` was shown as visible text under the Contact section's
 button — removed entirely, per explicit instruction (not just hidden,
@@ -420,7 +421,7 @@ feedback first; user then said to do what I thought best.
 assumed light background — this site is dark-mode-only with a mint accent,
 so black-on-transparent text would have been invisible and the blue would
 have clashed with every other accent use on the site. Recolored: brackets
-+ dot to `var(--color-accent)` (mint), name text to `var(--color-text)`
+- dot to `var(--color-accent)` (mint), name text to `var(--color-text)`
 (off-white). The `viewBox` also had ~120px of dead space on each side of
 the actual glyphs; remeasured the true bounding box by rendering it
 (headless Chromium, `getBBox()`) and cropped to `-6 -11 450 76`.
@@ -439,3 +440,69 @@ Same split as the existing marks: `public/logo.svg` (static, literal hex,
 for contexts with no CSS) + `src/components/ui/Wordmark.tsx` (inline JSX,
 `var(--color-*)`, used in Nav/Footer) — both must be updated together if
 the mark changes, same as `Logomark.tsx`/`favicon.svg` already were.
+
+---
+
+## 2026-08-28 — SEO pass: per-page metadata, Open Graph, sitemap, structured data
+
+**Audit found**: every route shared the exact same `<title>` and meta
+description (the homepage's) — all 6 case-study pages were indistinguishable
+to search engines and social previews. No Open Graph or Twitter Card tags
+at all, no canonical links, no `robots.txt`, no `sitemap.xml`, no
+structured data. One literal em dash in real content: the root `<title>`
+itself ("nomdevs — product engineering") and the case-study screenshot
+placeholder text ("screenshot — supplied separately") — both fixed (the
+rest of the em-dash hits found were in code comments, not rendered
+content, and left alone).
+
+**Per-route metadata**: added `src/lib/seo.ts` — a `pageHead()` helper
+building title, meta description, Open Graph, Twitter Card, and canonical
+link from `{title, description, path, image?}`. Every route (`index.tsx`
++ the 6 case-study routes) calls it explicitly with its own values, rather
+than relying on a shared root default that child routes override — with
+something as important as the title tag, explicit-per-route is more
+robust than trusting merge semantics. Confirmed in the actual build output
+that each page renders a distinct, correct `<title>`/description/OG
+block and canonical URL. `__root.tsx` now only carries page-independent
+tags (charset, viewport) and links (favicons, fonts, stylesheet) — nothing
+content-specific.
+
+**Open Graph images**: case-study pages use the project's own screenshot
+as `og:image` (already a real, representative image — better than a
+generic banner). The homepage needed a dedicated banner since it has no
+equivalent asset; generated one (`public/og-image.png`, 1200x630, standard
+OG size) the same way as the favicon and the Makro illustration — SVG,
+rasterized via headless Chromium. Kept as PNG rather than WebP
+specifically for this one asset: OG image compatibility across all social
+scrapers is the priority here, and PNG has zero risk of an older bot not
+rendering the preview, unlike the regular in-page screenshots where WebP's
+size savings clearly win and modern platform support is universal.
+
+**Structured data**: added a schema.org `Organization` JSON-LD block,
+inlined directly in `RootDocument`'s `<head>` (not via the route `head()`
+API — the `scripts` field there is present in the types but not
+documented/typed as concretely as `meta`/`links`, so a plain `<script
+type="application/ld+json">` in JSX is simpler and unambiguous). Deliberately
+**omits** `sameAs` (the social links in `data/socials.ts` are still `#`
+placeholders — publishing fake profile URLs in structured data is worse
+than omitting the field) and `contactPoint`/email (the email is
+deliberately hidden sitewide per an earlier explicit instruction; putting
+it in JSON-LD would undo that, since structured data is still plain
+crawlable page source).
+
+**`robots.txt`** (allow all, points at the sitemap) and **`sitemap.xml`**
+(hand-written, all 7 URLs) added to `public/`. No `<lastmod>` in the
+sitemap — no reliable way to track real last-modified dates yet, and
+fabricating one would be inventing a fact. Sitemap is hand-maintained; a
+new case-study route means updating it by hand, same trade-off already
+accepted for the favicon/logo asset pairs.
+
+**Heading hierarchy**: was already clean (exactly one `<h1>` per page,
+verified in the browser) — Hero's headline on the homepage, the project
+title on each case-study page, `<h2>`s for section headings, `<h3>`s for
+card titles, no skipped levels. Added two new `<h2>`s to `CaseStudyPage`
+("The story", "Stack", "Outcomes" — three, not two) that didn't exist
+before, styled as unobtrusive mono eyebrow labels matching the pattern
+already used for "Featured work" — improves semantic structure and
+keyword relevance on what were previously heading-less detail pages,
+with no visible design change beyond three small labels.

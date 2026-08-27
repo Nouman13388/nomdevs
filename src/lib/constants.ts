@@ -3,6 +3,9 @@ export interface NavLink {
 	label: string;
 }
 
+/** Canonical origin, used to build absolute URLs for canonical links, Open Graph, and the sitemap. */
+export const SITE_URL = "https://nomdevs.com";
+
 /** Every "Book a Call" action mailto's here — no visible email shown on the site. */
 export const CONTACT_EMAIL = "nomdev8@gmail.com";
 export const BOOK_A_CALL_HREF = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Book a call")}`;

@@ -12,8 +12,12 @@ import { otherWork, projects } from "#/data/projects";
 import { services } from "#/data/services";
 import { siteContent } from "#/data/site";
 import { stats } from "#/data/stats";
+import { pageHead } from "#/lib/seo";
 
-export const Route = createFileRoute("/")({ component: Home });
+export const Route = createFileRoute("/")({
+	head: () => pageHead({ ...siteContent.seo, path: "/" }),
+	component: Home,
+});
 
 function Home() {
 	return (
