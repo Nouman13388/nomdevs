@@ -521,3 +521,22 @@ deleted file, confirming it's the same asset. If the deletion was
 deliberate (e.g. relying on the SVG favicon alone, which every modern
 browser supports), say so and I'll remove the PNG `<link>` and the
 `logo` reference properly instead of restoring the file.
+
+---
+
+## 2026-08-28 — Bug fix: wordmark's closing bracket floated far from the name
+
+User caught it visually. Root cause: the closing `/>` bracket's `x`
+position was copied verbatim from the user's original draft SVG, which
+positioned it at a fixed coordinate (`x=380` at 48px, `x=513` at the
+64px OG-banner scale) regardless of how wide "nom.devs" actually renders
+in this font — leaving a large dead gap between the name and the closing
+tag instead of the tag hugging its content like a real code tag would.
+
+Fixed by measuring the actual rendered text width (headless Chromium,
+`getComputedTextLength()`) and repositioning the closing bracket
+immediately after it, with the same gap already used between `<` and the
+name. Applied at both scales: `public/logo.svg`/`Wordmark.tsx` (48px,
+close bracket `x=380→270`, viewBox tightened to `340` wide) and the
+`public/og-image.png` banner (64px, `x=513→361`, regenerated from its
+source SVG in the scratchpad and re-rasterized).

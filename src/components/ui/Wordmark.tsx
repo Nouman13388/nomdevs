@@ -13,7 +13,7 @@ export type WordmarkProps = ComponentPropsWithoutRef<"svg">;
  */
 export function Wordmark(props: WordmarkProps) {
 	return (
-		<svg viewBox="-6 -11 450 76" role="img" aria-label="nomdevs" {...props}>
+		<svg viewBox="-6 -11 340 76" role="img" aria-label="nomdevs" {...props}>
 			<title>nomdevs</title>
 			<g
 				fontFamily="'JetBrains Mono', ui-monospace, monospace"
@@ -28,7 +28,7 @@ export function Wordmark(props: WordmarkProps) {
 					<tspan fill="var(--color-accent)">.</tspan>
 					devs
 				</text>
-				<text x="380" y="44" fill="var(--color-accent)">
+				<text x="270" y="44" fill="var(--color-accent)">
 					{"/>"}
 				</text>
 			</g>
